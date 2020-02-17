@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1bbe1a8a-7537-4dc1-8933-1da70615d6cf" name="Default Changelist" comment="" />
+    <list default="true" id="f718fc9a-b6c4-46af-b535-09281b16f8fd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/dist.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/dist.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tag/bailiff/Bailiff$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/tag/bailiff/Bailiff$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tag/bailiff/Bailiff$Agitator.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/tag/bailiff/Bailiff$Agitator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tag/bailiff/Bailiff.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/tag/bailiff/Bailiff.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tag/bailiff/BailiffInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/tag/bailiff/BailiffInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tag/dexter/Dexter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/tag/dexter/Dexter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tag/dexter/DexterInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Bailiff-dl.jar" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Bailiff-dl.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Bailiff.jar" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Bailiff.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Dexter.jar" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Dexter.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/develop/tag/bailiff/Bailiff$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/develop/tag/bailiff/Bailiff$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/develop/tag/bailiff/Bailiff.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/develop/tag/bailiff/Bailiff.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/develop/tag/bailiff/BailiffInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/develop/tag/bailiff/BailiffInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/develop/tag/dexter/Dexter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/develop/tag/dexter/Dexter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/develop/tag/dexter/DexterInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/bin/pc/HTTPD_CFG.BAT" beforeDir="false" afterPath="$PROJECT_DIR$/../test/bin/pc/HTTPD_CFG.BAT" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/cbs/Bailiff-dl.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/cbs/Bailiff.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/cbs/Dexter.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/cbs/jini-core.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/cbs/jini-ext.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/cbs/reggie-dl.jar" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,6 +42,7 @@
     </option>
   </component>
   <component name="ProjectId" id="1XtfWr0Q8qhBliiRjaaVBxXApjG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />

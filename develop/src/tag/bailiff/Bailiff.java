@@ -50,6 +50,9 @@ public class Bailiff
   implements
     tag.bailiff.BailiffInterface // for clients
 {
+
+  List<Dexter> listDexters;
+
   // When debug is true, trace and diagnostic messages are printed.
   protected boolean debug = false;
 
@@ -78,15 +81,6 @@ public class Bailiff
   // The Jini JoinManager is a support tool that helps a service to
   // join and leave one or more Jini lookup servers.
   protected JoinManager bf_joinmanager;
-
-
-
-
-
-
-
-
-
 
   /**
    * If debug is enabled, prints a message on stdout.
@@ -184,10 +178,11 @@ public class Bailiff
    * @throws RemoteException
    */
 
-  List<String> list = new ArrayList<String>();
-  public String ping (String UUID) throws java.rmi.RemoteException
+//  List<String> list = new ArrayList<String>();
+  public String ping (Dexter dex) throws java.rmi.RemoteException
   {
-    list.add(UUID);
+    addDexter(dex);
+    System.out.println(getDexters().size() + " ADDED");
 
     log.fine ("ping");
 
@@ -196,6 +191,14 @@ public class Bailiff
 		    id,
 		    myHostName,
 		    myInetAddress.getHostAddress ());
+  }
+
+  public void remove (Dexter dex) throws java.rmi.RemoteException
+  {
+    List<Dexter> ld = getDexters();
+    ld.removeIf(s -> s.getUUID().equals(dex.getUUID()));
+    setDexter(ld);
+    System.out.println(getDexters().size() + " REMOVED");
   }
 
   /**
@@ -210,6 +213,11 @@ public class Bailiff
     return propertyMap.get (key.toLowerCase ());
   }
 
+  public List<Dexter> getDexters()
+  {
+    return listDexters;
+  }
+
   /**
    * Sets the property value to be stored under key.
    * @param key   The name of the property.
@@ -220,6 +228,39 @@ public class Bailiff
     log.fine(String.format("setProperty key=%s value=%s", key, value));
 
     propertyMap.put (key.toLowerCase (), value);
+  }
+
+  public void addDexter(Dexter dex)
+  {
+    listDexters.add(dex);
+  }
+
+  public void remDexter(Dexter dex)
+  {
+    listDexters.remove(dex);
+  }
+
+  public void setDexter(List<Dexter> dex)
+  {
+    listDexters = dex;
+  }
+
+  public void setTagged_(Dexter dex, Dexter dex1)
+  {
+    List<Dexter> ld = listDexters;
+    if(ld.removeIf(s -> s.getUUID().equals(dex1.getUUID())))
+    {
+      Dexter tmp = dex1;
+      tmp.setTagged(true);
+      ld.add(tmp);
+
+      if(ld.removeIf(s -> s.getUUID().equals(dex.getUUID()))) {
+        dex.setTagged(false);
+        ld.add(dex);
+      }
+
+      setDexter(ld);
+    }
   }
 
   /**
@@ -244,17 +285,21 @@ public class Bailiff
 			   cb,
 			   Arrays.toString(args)));
 
-    System.out.println(this);
-    System.out.println("-------");
-    System.out.println("Before:");
-    System.out.println(list);
-    list.remove(UUID);
-    System.out.println("After:");
-    System.out.println(list);
-    System.out.println("-------");
+    Dexter tmp = (Dexter) obj;
 
-    Agitator agt = new Agitator (obj, cb, args);
+    List<Dexter> l_t = getDexters();
+    for(int i=0; i<getDexters().size(); i++)
+    {
+      if(l_t.get(i).getUUID().equals(tmp.getUUID()))
+      {
+        tmp.setTagged(l_t.get(i).isTagged());
+        break;
+      }
+    }
+
+    Agitator agt = new Agitator (tmp, cb, args);
     agt.initialize ();
+
     agt.start ();
   }
 
@@ -292,6 +337,8 @@ public class Bailiff
     myHostName    = myInetAddress.getHostName ().toLowerCase ();
 
     // Create and initialize the property map
+
+    listDexters = new ArrayList<Dexter>();
 
     propertyMap =
       Collections.synchronizedMap (new HashMap<String,String> ());

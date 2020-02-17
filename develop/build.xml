@@ -59,12 +59,14 @@
 	 includes="**/Bailiff$$Agitator.class
 	           **/Bailiff$$1.class
 		   **/Bailiff.class
-		   **/BailiffInterface.class">
+		   **/BailiffInterface.class
+          **/Dexter.class">
     </jar>
 
     <jar basedir="${dir.build}" compress="true"
          destfile="${dir.dist}/${bailiffcapsname}-dl.jar"
-	 includes="**/BailiffInterface.class">
+	 includes="**/BailiffInterface.class
+                **/Dexter.class">
     </jar>
 
   </target>

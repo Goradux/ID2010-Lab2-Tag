@@ -4,12 +4,14 @@
 package tag.dexter;
 
 import java.io.*;    // TODO remove the asterisk
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
 import net.jini.core.lookup.*;
 import net.jini.lookup.*;
 
+import tag.bailiff.Bailiff;
 import tag.bailiff.BailiffInterface;
 
 /**
@@ -23,13 +25,16 @@ public class Dexter implements Serializable {
   /**
    * Identification string used in debug messages.
    */
-  private String id = UUID.randomUUID().toString();
+  private BailiffInterface pb = null;
 
+  private String id = UUID.randomUUID().toString();
   public String getUUID() {
     return id;
   }
 
   private boolean isTagged = false;
+  public void setTagged(boolean isTagged_) {isTagged = isTagged_;}
+  public boolean isTagged() {return isTagged;}
 
   /**
    * Default sleep time so that we have time to track what it does.
@@ -205,9 +210,9 @@ public class Dexter implements Serializable {
 
       // Sleep a bit so that humans can keep up.
 
-      debugMsg("Is here - entering restraint sleep.");
-      snooze(restraintSleepMs);
-      debugMsg("Leaving restraint sleep.");
+      //debugMsg("Is here - entering restraint sleep.");
+      //snooze(restraintSleepMs);
+      //debugMsg("Leaving restraint sleep.");
 
       // Try to find Bailiffs using the Jini lookup service.
       // The loop keeps going until we get a non-empty response.
@@ -256,10 +261,40 @@ public class Dexter implements Serializable {
 
         if (obj instanceof BailiffInterface) {
           bfi = (BailiffInterface) obj;
+          if(pb != null) {
+
+            List<Dexter> l_t = pb.getDexters();
+            for(int i=0; i< l_t.size(); i++)
+            {
+              if(l_t.get(i).getUUID().equals(getUUID()))
+              {
+                setTagged(l_t.get(i).isTagged());
+                //System.out.println("GOT TAGGED");
+                break;
+              }
+            }
+            pb.remove(this);
+          }
           try {
-            String response = bfi.ping(getUUID()); // Ping it
+            String response = bfi.ping(this); // Ping it
             debugMsg(response);
             accepted = true;  // It worked!
+            pb = bfi; //saving for future ping - to remove dexter from list
+
+            if(isTagged)
+            {
+              System.out.println("--------------------");
+
+              List<Dexter> list = bfi.getDexters();
+              for(int i=0; i<list.size(); i++)
+              {
+                if(!list.get(i).getUUID().equals(getUUID())) {
+                  bfi.setTagged_(this, list.get(i));
+                  System.out.println(getUUID() + " TAGGED " + list.get(i).getUUID());
+                }
+              }
+            }
+
           } catch (java.rmi.RemoteException rex) {
             debugMsg("Ping fail: " + bfi);
           }
@@ -277,8 +312,11 @@ public class Dexter implements Serializable {
           debugMsg("Trying to jump...");
 
           try {
+            //snooze(5000);
+
             bfi.migrate(this, getUUID(), "topLevel", new Object[]{});
             // SUCCESS
+
             SDM.terminate();  // shut down Service Discovery Manager
             return;    // return and end this thread
           } catch (java.rmi.RemoteException rex) {
@@ -337,6 +375,8 @@ public class Dexter implements Serializable {
             return;
           } else if (av.equals("-debug"))
             dx.setDebug(true);
+          else if (av.equals("-t"))
+            dx.setTagged(true);
           else if (av.equals("-id"))
             state = 1;
           else if (av.equals("-rs"))
@@ -345,8 +385,6 @@ public class Dexter implements Serializable {
             state = 3;
           else if (av.equals("-mr"))
             state = 4;
-          else if (av.equals("-t"))
-            state = 5;
           else {
             System.err.println("Unknown commandline argument: " + av);
             return;
@@ -375,6 +413,9 @@ public class Dexter implements Serializable {
 
         case 5:
           dx.isTagged = true;
+          if (dx.isTagged) {
+            System.out.println("tagged");
+          }
           state = 0;
           break;
 

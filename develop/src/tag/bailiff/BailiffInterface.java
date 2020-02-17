@@ -3,6 +3,10 @@
 
 package tag.bailiff;
 
+import tag.dexter.Dexter;
+
+import java.util.List;
+
 /**
  * This interface is for the Bailiff's clients. The clients are mobile
  * code which move into the Bailiff's JVM for execution.
@@ -15,9 +19,13 @@ public interface BailiffInterface
    * Returns a string which confirms communication with the Bailiff
    * service instance.
    */
-  public String ping (String UUID)
+  public String ping (Dexter dex)
     throws
       java.rmi.RemoteException;
+
+  public void remove (Dexter dex)
+          throws
+          java.rmi.RemoteException;
 
   /**
    * Returns a property of the Bailiff.
@@ -27,6 +35,12 @@ public interface BailiffInterface
   public String getProperty (String key)
     throws
       java.rmi.RemoteException;
+
+  public List<Dexter> getDexters()
+          throws java.rmi.RemoteException;
+
+  public void setTagged_(Dexter dex, Dexter dex1)
+          throws java.rmi.RemoteException;
 
   /**
    * The entry point for mobile code.
