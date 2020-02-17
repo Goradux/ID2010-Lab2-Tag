@@ -182,7 +182,14 @@ public class Bailiff
   public String ping (Dexter dex) throws java.rmi.RemoteException
   {
     addDexter(dex);
-    System.out.println(getDexters().size() + " ADDED");
+    System.out.println("Current size: " + getDexters().size() + " (added 1)");
+
+    // HERE
+//    System.out.println("Current Dexters:");
+//    for (int i=0; i<listDexters.size(); i++) {
+//      System.out.print(listDexters.get(i).getUUID() + " ");
+//    }
+//    System.out.println();
 
     log.fine ("ping");
 
@@ -198,7 +205,14 @@ public class Bailiff
     List<Dexter> ld = getDexters();
     ld.removeIf(s -> s.getUUID().equals(dex.getUUID()));
     setDexter(ld);
-    System.out.println(getDexters().size() + " REMOVED");
+    System.out.println("Current size: " + getDexters().size() + " (removed 1)");
+
+    // HERE
+//    System.out.println("Current Dexters:");
+//    for (int i=0; i<listDexters.size(); i++) {
+//      System.out.print(listDexters.get(i).getUUID() + " ");
+//    }
+//    System.out.println();
   }
 
   /**
