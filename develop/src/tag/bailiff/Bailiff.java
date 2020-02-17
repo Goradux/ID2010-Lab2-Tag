@@ -252,6 +252,9 @@ public class Bailiff
     System.out.println("After:");
     System.out.println(list);
     System.out.println("-------");
+      Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
+      System.out.println(threadSet.size());
+      System.out.println("------SIZE-----");
 
     Agitator agt = new Agitator (obj, cb, args);
     agt.initialize ();
