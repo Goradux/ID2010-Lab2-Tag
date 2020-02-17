@@ -291,6 +291,7 @@ public class Dexter implements Serializable {
                 if(!list.get(i).getUUID().equals(getUUID())) {
                   bfi.setTagged_(this, list.get(i));
                   System.out.println(getUUID() + " TAGGED " + list.get(i).getUUID());
+                  break; // mb?
                 }
               }
             }
